@@ -3,6 +3,7 @@ const reload = require('reload');
 require('dotenv').config({ path: '.env' });
 const morgan = require('morgan');
 const path = require('path');
+const router = require('./server/routes/router');
 
 const app = express();
 
@@ -25,15 +26,12 @@ app.use('/img', express.static(path.join(__dirname, 'assets', 'img')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.render('index');
+// load routers
+app.use(router);
+app.use('*', (req, res) => {
+  res.render('404');
 });
-app.get('/add-user', (req, res) => {
-  res.render('add_user');
-});
-app.get('/update-user', (req, res) => {
-  res.render('update_user');
-});
+
 reload(app)
   .then(() => {
     const server = app.listen(app.get('port'), () =>
