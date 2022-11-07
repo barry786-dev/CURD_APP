@@ -4,8 +4,12 @@ require('dotenv').config({ path: '.env' });
 const morgan = require('morgan');
 const path = require('path');
 const router = require('./server/routes/router');
+const { connectDB } = require('./server/database/connection');
 
 const app = express();
+
+// connect to database
+connectDB();
 
 // set server port
 app.set('port', process.env.PORT || 8080);
