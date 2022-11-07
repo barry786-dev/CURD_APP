@@ -17,6 +17,7 @@ exports.create = async (req, res) => {
       (obj, key) => ((obj[key] = req.body[key]), obj),
       {}
     );
+    // req.body is = UserData here we just use reduce above in case some one wants to get only certain data from the body object
     const user = new UsersDB(UserData);
     // save user in the database
     connectDB()
@@ -71,7 +72,78 @@ exports.read = (req, res) => {
 };
 
 // Update a new identified user by user id
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+  // validate request
+  if (!req.body) {
+    return res.status(400).send({ message: 'Data to update can not be empty' });
+  }
+
+  const id = req.params.id;
+  connectDB()
+    .then(() => {
+      UsersDB.findByIdAndUpdate(id, req.body, {
+        useFindAndModify: false,
+        new: true,
+      })
+        .then((data) => {
+          if (!data) {
+            res.status(404).send({
+              message: `can not Update this user, Maybe user is not exist `,
+            });
+          } else {
+            res.send(data);
+          }
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message:
+              'error during try to update the user >>>:' +
+              `${err.message || 'error during try to Update the user'}`,
+          });
+        });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          'error during trying to connect to main database, please try again later or contact the admin >>>:' +
+          `${err}`,
+      });
+    });
+};
 
 // Delete a user with specified user id in the request
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+  const id = req.params.id;
+  connectDB()
+    .then(() => {
+      UsersDB.findByIdAndDelete(id, {
+        new: true,
+      })
+        .then((data) => {
+          if (!data) {
+            res.status(404).send({
+              message: `can not delete this user, Maybe user is not exist `,
+            });
+          } else {
+            res.send({
+              message: 'User was deleted successfully',
+              'deleted user': data,
+            });
+          }
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message:
+              'error during try to delete the user >>>:' +
+              `${err.message || 'error during try to delete the user'}`,
+          });
+        });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          'error during trying to connect to main database, please try again later or contact the admin >>>:' +
+          `${err}`,
+      });
+    });
+};
