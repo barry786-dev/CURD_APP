@@ -26,10 +26,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.render('index.ejs');
+  res.render('index');
 });
 app.get('/add-user', (req, res) => {
-  res.render('add_user.ejs');
+  res.render('add_user');
+});
+app.get('/update-user', (req, res) => {
+  res.render('update_user');
 });
 reload(app)
   .then(() => {
