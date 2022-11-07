@@ -22,9 +22,9 @@ router.get('/add-user', renderServices.addUser);
 router.get('/update-user', renderServices.updateUser);
 
 // API
-router.post('/api/users', userControllers.create);
-router.get('/api/users', userControllers.find);
-router.put('/api/users/:id', userControllers.update);
-router.delete('/api/users/:id', userControllers.delete);
+router.post('/api/users', userControllers.create);//create
+router.get('/api/users', userControllers.read); //read
+router.put('/api/users/:id', userControllers.update);//update
+router.delete('/api/users/:id', userControllers.delete);//delete
 
 module.exports = router;
