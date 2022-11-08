@@ -53,11 +53,11 @@ exports.read = (req, res) => {
       if (req.query.id) {
         const id = req.query.id;
         UsersDB.findById(id)
-          .then((data) => {
-            if (!data) {
+          .then((user) => {
+            if (!user) {
               res.status(404).send({ message: 'Not find user with this id' });
             } else {
-              res.send(data);
+              res.send(user);
             }
           })
           .catch((err) => {
@@ -67,8 +67,8 @@ exports.read = (req, res) => {
           });
       } else {
         UsersDB.find()
-          .then((user) => {
-            res.send(user);
+          .then((data) => {
+            res.send(data);
           })
           .catch((err) => {
             res.status(500).send({

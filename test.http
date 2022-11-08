@@ -1,14 +1,14 @@
 
-# POST http://localhost:3000/api/users
+POST http://localhost:3000/api/users
 # GET http://localhost:3000/api/users
-GET http://localhost:3000/api/users?id=636a63d1849a3396866680cd
+# GET http://localhost:3000/api/users?id=636a63d1849a3396866680cd
 # PUT http://localhost:3000/api/users/63697e40f55606bf4f3b40f5
 # DELETE  http://localhost:3000/api/users/63697e40f55606bf4f3b40f5
 Content-Type: application/json
 
-# {
-#   "name" : "Ali",
-#   "gender" : "Male",
-#   "email" : "mbrsyr@yahoo.com",
-#   "status":"Inactive"
-# }
+{
+  "name" : "Nour",
+  "gender" : "Male",
+  "email" : "mbrsyr@msn.com",
+  "status":"Active"
+}

@@ -13,6 +13,8 @@ connectDB();
 
 // set server port
 app.set('port', process.env.PORT || 8080);
+app.set('host', process.env.HOST);
+app.set('api', process.env.API);
 
 // set view engine
 app.set('view engine', 'ejs');
@@ -35,12 +37,11 @@ app.use(router);
 app.use('*', (req, res) => {
   res.render('404');
 });
-
 reload(app)
   .then(() => {
     const server = app.listen(app.get('port'), () =>
       console.log(
-        `server is running on http://localhost:${server.address().port}`
+        `server is running on ${app.get('host')}${server.address().port}`
       )
     );
   })
