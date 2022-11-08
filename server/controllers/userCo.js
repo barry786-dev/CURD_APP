@@ -25,7 +25,8 @@ exports.create = async (req, res) => {
         user
           .save()
           .then((data) => {
-            res.send(data);
+            // res.send('a new user with these data :' + data + ' get created');
+            res.redirect('/add-user');
           })
           .catch((err) => {
             res.status(500).send({
