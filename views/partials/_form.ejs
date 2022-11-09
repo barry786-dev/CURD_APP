@@ -1,12 +1,17 @@
+<!-- <form
+  method="<#%= user._id ?'PUT' : 'POST'%>"
+  id="<#%= id %>"
+  action="<#%= user._id ?'api/users/'+ user._id : 'api/users'%>"
+> -->
 <form
-  method="<%= user._id ?'PUT' : 'POST'%>"
+  method="POST"
   id="<%= id %>"
-  action="<%= user._id ?'api/users/'+ user._id : 'api/users'%>"
+  action="<%= user._id ? '' : 'api/users'%>"
 >
   <div class="new_user">
     <div class="form-group">
       <label for="name" class="text-light">Name</label>
-      <input type="hidden" name="id" value="" />
+      <input type="hidden" name="id" value="<%= id==='add_user' ? '' : user._id %>" />
       <input
         type="text"
         name="name"
@@ -50,11 +55,13 @@
       </div>
     </div>
     <div class="form-group">
-      <button
-        type="<%= id==='add_user' ? 'submit' : 'button'%>"
+      <!-- <button
+        type="<#%= id==='add_user' ? 'submit' : 'button'%>"
         class="btn text-dark"
-        id="<%= id==='add_user' ? '' : 'update_user_btn'%>"
       >
+        <#%= id==='add_user' ? 'SAVE' : 'UPDATE'%>
+      </button> -->
+      <button type="submit" class="btn text-dark">
         <%= id==='add_user' ? 'SAVE' : 'UPDATE'%>
       </button>
     </div>

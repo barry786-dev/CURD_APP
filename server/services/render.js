@@ -19,7 +19,6 @@ exports.addUser = (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
-  console.log(req.query.id);
   axios
     .get(
       `${req.app.get('host')}${req.app.get('port')}${req.app.get('api')}?id=${
@@ -30,5 +29,13 @@ exports.updateUser = (req, res) => {
       res.render('update_user', {
         user: response.data,
       });
+    })
+    .catch((err) => {
+      res.send(err);
     });
+
+  // axios.get(
+  //     `${req.app.get('host')}${req.app.get('port')}${req.app.get('api')}
+  //     }`,{params:{id:req.query.id}}
+  //   )
 };
