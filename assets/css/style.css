@@ -201,3 +201,7 @@ table {
 #not_found404 {
   text-align: center;
 }
+
+.delete {
+  cursor: pointer;
+}

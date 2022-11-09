@@ -36,3 +36,34 @@ $('#update_user').submit(function (e) {
     window.location.href = '/';
   }, 1000);
 });
+
+// $('.delete').click(function () {
+//   userId = $(this).attr('data-userId');
+//   const request = {
+//     method: 'DELETE',
+//     url: `api/users/${userId}`,
+//   };
+//   $.ajax(request).done((response) => {
+//     alert('the user deleted');
+//   });
+//   setTimeout(() => {
+//     window.location.href = '/';
+//   }, 1000);
+// });
+
+if (window.location.pathname == '/') {
+  $onDelete = $('.table tbody td a.delete');
+  $onDelete.click(function () {
+    const userId = $(this).attr('data-userId');
+    const request = {
+      method: 'DELETE',
+      url: `api/users/${userId}`,
+    };
+    if (confirm('Are you sure?')) {
+      $.ajax(request).done((response) => {
+        alert('the user deleted');
+        location.reload();
+      });
+    }
+  });
+}
