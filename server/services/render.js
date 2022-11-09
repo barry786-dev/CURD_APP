@@ -19,5 +19,16 @@ exports.addUser = (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
-  res.render('update_user');
+  console.log(req.query.id);
+  axios
+    .get(
+      `${req.app.get('host')}${req.app.get('port')}${req.app.get('api')}?id=${
+        req.query.id
+      }`
+    )
+    .then((response) => {
+      res.render('update_user', {
+        user: response.data,
+      });
+    });
 };

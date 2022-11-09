@@ -1,6 +1,4 @@
-<% let i=0 %>
-<%users.forEach(user=>{%>
-  <% i++ %>
+<% let i=0 %> <%users.forEach(user=>{%> <% i++ %>
 <tr>
   <td><%=i %></td>
   <td><%=user.name %></td>
@@ -8,7 +6,7 @@
   <td><%=user.gender %></td>
   <td><%=user.status %></td>
   <td>
-    <a href="/update-user" class="btn border-shadow update">
+    <a href="/update-user?id=<%=user._id %>" class="btn border-shadow update">
       <span class="text-gradient">
         <i class="fas fa-pencil-alt"></i>
       </span>

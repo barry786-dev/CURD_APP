@@ -95,7 +95,7 @@ exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({ message: 'Data to update can not be empty' });
   }
-
+console.log('userCo.98',req.body);
   const id = req.params.id;
   connectDB()
     .then(() => {
@@ -109,7 +109,8 @@ exports.update = (req, res) => {
               message: `can not Update this user, Maybe user is not exist `,
             });
           } else {
-            res.send(data);
+           // res.send('hallo');
+           res.redirect('/');
           }
         })
         .catch((err) => {
